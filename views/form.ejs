@@ -1,0 +1,164 @@
+<%- include('header'); -%>
+
+    <div class="container">
+
+
+
+        <div class="my-4">
+            <% if(message) { %>
+                <div class="alert alert-<%= message.type %>" role="alert">
+                    <%= message.message %>
+                </div>
+
+                <% } %>
+
+                    <% if(typeof(errors) !='undefined' ){ %>
+                        <!-- insert error view here -->
+                        <div class="alert alert-danger" role="alert">
+                            <% { for(var error of errors){ %>
+                                <div>
+                                    <%= error.msg %>
+                                </div>
+                                <% } } %>
+                        </div>
+                        <% } %>
+        </div>
+
+
+        <div class="row mt-4">
+            <div class="col-2"></div>
+            <div class="col-8">
+
+                <% if(typeof(total)=='undefined' ){ %>
+                    <div class="card" onclick="return handleDelete(12);">
+                        <div class="card-body">
+                            <h3>Juice Order</h3>
+                            <form action="/" method="post">
+
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name:</label>
+                                    <input class="form-control" type="text" id="name" name="name"
+                                        placeholder="Enter name">
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label for="address" class="form-label">Address:</label>
+                                    <input class="form-control" type="text" id="address" name="address"
+                                        placeholder="Enter address">
+
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number:</label>
+                                    <input class="form-control" type="text" id="phone" name="phone"
+                                        placeholder="123-456-7890">
+
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="mangoJuices" class="form-label">Mango Juices - $2.99 :</label>
+                                    <input type="text" id="mangoJuices" name="mangoJuices" class="form-control">
+
+                                </div>
+                                <div class="mb-3">
+                                    <label for="berryJuices" class="form-label">Berry Juices - $1.99:</label>
+                                    <input type="text" id="berryJuices" name="berryJuices" class="form-control">
+
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="appleJuices" class="form-label">Apple Juices - $2.49:</label>
+                                    <input type="text" id="appleJuices" name="appleJuices" class="form-control">
+
+                                </div>
+                                <!-- ------ -->
+
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <% } %>
+                        <!-- -------- -->
+                        <% if(typeof(total) !='undefined' ){ %>
+                            <div class="receipt">
+                                <h1 id="formResult">Your Receipt:</h1>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Customer Receipt</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>
+                                                <%= name %>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Phone: </td>
+                                            <td>
+                                                <%= phone %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address: </td>
+                                            <td>
+                                                <%= address %>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>Mango Juices ($2.99 each)</td>
+                                            <td>
+                                                <%= mangoJuices %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Berry Juices ($1.99 each) </td>
+                                            <td>
+                                                <%= berryJuices %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> Apple Juices ($2.49 each) </td>
+                                            <td>
+                                                <%= appleJuices %>
+                                            </td>
+                                        </tr>
+                                        <tr class="total">
+                                            <td>Subtotal: </td>
+                                            <td>$<%= subTotal.toFixed(2) %>
+                                            </td>
+                                        </tr>
+                                        <tr class="total">
+                                            <th>Tax (13%) </th>
+                                            <td>$<%= tax.toFixed(2) %>
+                                            </td>
+                                        </tr>
+                                        <tr class="total">
+                                            <th>Total </th>
+                                            <td>$<%= total.toFixed(2) %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="footer">
+                                    Thank you for your purchase!
+                                </div>
+                            </div>
+                            <% } %>
+
+                                <!-- ------ -->
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+
+    <%- include('footer'); -%>
